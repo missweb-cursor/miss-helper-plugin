@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Managed-hosting plugin for Dify. Route B all-in-one toolkit (no remote debug).",
   "author": "you",
-  "entry": "main:app",
+  "entry": "main:run",
   "tags": [
     "utility",
     "text",
@@ -29,9 +29,7 @@
             "description": "Text to echo"
           }
         },
-        "required": [
-          "text"
-        ]
+        "required": ["text"]
       }
     },
     {
@@ -47,17 +45,11 @@
           },
           "mode": {
             "type": "string",
-            "enum": [
-              "upper",
-              "lower",
-              "reverse"
-            ],
+            "enum": ["upper", "lower", "reverse"],
             "description": "Transform mode"
           }
         },
-        "required": [
-          "text"
-        ]
+        "required": ["text"]
       }
     },
     {
@@ -67,23 +59,11 @@
       "parameters": {
         "type": "object",
         "properties": {
-          "text": {
-            "type": "string",
-            "description": "Text to translate"
-          },
-          "target_lang": {
-            "type": "string",
-            "description": "Target language code, e.g. en, zh, ja, es"
-          },
-          "source_lang": {
-            "type": "string",
-            "description": "Optional source code, e.g. auto, en"
-          }
+          "text": { "type": "string", "description": "Text to translate" },
+          "target_lang": { "type": "string", "description": "Target language code, e.g. en, zh, ja, es" },
+          "source_lang": { "type": "string", "description": "Optional source code, e.g. auto, en" }
         },
-        "required": [
-          "text",
-          "target_lang"
-        ]
+        "required": ["text", "target_lang"]
       }
     },
     {
@@ -93,14 +73,9 @@
       "parameters": {
         "type": "object",
         "properties": {
-          "text": {
-            "type": "string",
-            "description": "Text to detect"
-          }
+          "text": { "type": "string", "description": "Text to detect" }
         },
-        "required": [
-          "text"
-        ]
+        "required": ["text"]
       }
     },
     {
@@ -110,18 +85,10 @@
       "parameters": {
         "type": "object",
         "properties": {
-          "text": {
-            "type": "string"
-          },
-          "sentences": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 10
-          }
+          "text": { "type": "string" },
+          "sentences": { "type": "integer", "minimum": 1, "maximum": 10 }
         },
-        "required": [
-          "text"
-        ]
+        "required": ["text"]
       }
     },
     {
@@ -131,18 +98,10 @@
       "parameters": {
         "type": "object",
         "properties": {
-          "text": {
-            "type": "string"
-          },
-          "top_k": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 50
-          }
+          "text": { "type": "string" },
+          "top_k": { "type": "integer", "minimum": 1, "maximum": 50 }
         },
-        "required": [
-          "text"
-        ]
+        "required": ["text"]
       }
     },
     {
@@ -152,13 +111,9 @@
       "parameters": {
         "type": "object",
         "properties": {
-          "text": {
-            "type": "string"
-          }
+          "text": { "type": "string" }
         },
-        "required": [
-          "text"
-        ]
+        "required": ["text"]
       }
     },
     {
@@ -168,18 +123,10 @@
       "parameters": {
         "type": "object",
         "properties": {
-          "url": {
-            "type": "string"
-          },
-          "timeout": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 60
-          }
+          "url": { "type": "string" },
+          "timeout": { "type": "integer", "minimum": 1, "maximum": 60 }
         },
-        "required": [
-          "url"
-        ]
+        "required": ["url"]
       }
     },
     {
@@ -189,31 +136,14 @@
       "parameters": {
         "type": "object",
         "properties": {
-          "text": {
-            "type": "string"
-          },
-          "pattern": {
-            "type": "string"
-          },
+          "text": { "type": "string" },
+          "pattern": { "type": "string" },
           "flags": {
             "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "I",
-                "M",
-                "S",
-                "U",
-                "X",
-                "A"
-              ]
-            }
+            "items": { "type": "string", "enum": ["I", "M", "S", "U", "X", "A"] }
           }
         },
-        "required": [
-          "text",
-          "pattern"
-        ]
+        "required": ["text", "pattern"]
       }
     }
   ]
