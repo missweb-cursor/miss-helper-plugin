@@ -1,6 +1,6 @@
 # plugin.py
 import os, re, string, requests
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from collections import Counter
 from pydantic import BaseModel, Field, ValidationError
 from langdetect import detect  # 纯 Python，轻量
@@ -16,7 +16,7 @@ class TransformParams(BaseModel):
 class TranslateParams(BaseModel):
     text: str = Field(..., description="Text to translate")
     target_lang: str = Field(..., description="Target language code")
-    source_lang: str | None = Field(None, description="Source code (optional)")
+    source_lang: Optional[str] = Field(None, description="Source code (optional)")
 
 class TextOnly(BaseModel):
     text: str = Field(..., description="Text")
@@ -39,19 +39,20 @@ class RegexParams(BaseModel):
     flags: List[str] = []
 
 # -------- 工具实现 --------
+# Dify插件标准：工具返回包含text字段的dict
 def echo_text(params: Dict[str, Any]) -> Dict[str, Any]:
     p = EchoParams(**(params or {}))
-    return {"echo": p.text}
+    return {"text": p.text}
 
 def transform_text(params: Dict[str, Any]) -> Dict[str, Any]:
     p = TransformParams(**(params or {}))
     t = p.text or ""
     m = (p.mode or "upper").lower()
-    if m == "upper":   out = t.upper()
-    elif m == "lower": out = t.lower()
-    elif m == "reverse": out = t[::-1]
-    else: out = t
-    return {"text": out, "mode": m}
+    if m == "upper":   result = t.upper()
+    elif m == "lower": result = t.lower()
+    elif m == "reverse": result = t[::-1]
+    else: result = t
+    return {"text": result}
 
 def translate_text(params: Dict[str, Any]) -> Dict[str, Any]:
     p = TranslateParams(**(params or {}))
@@ -63,7 +64,7 @@ def translate_text(params: Dict[str, Any]) -> Dict[str, Any]:
     r.raise_for_status()
     data = r.json()
     txt = data.get("translatedText") or data.get("translated_text") or ""
-    return {"translated": txt, "source_lang": payload["source"], "target_lang": payload["target"]}
+    return {"text": txt}
 
 def detect_language(params: Dict[str, Any]) -> Dict[str, Any]:
     p = TextOnly(**(params or {}))
@@ -71,7 +72,7 @@ def detect_language(params: Dict[str, Any]) -> Dict[str, Any]:
         code = detect(p.text)
     except Exception:
         code = "unknown"
-    return {"language": code}
+    return {"text": code}
 
 def summarize_text(params: Dict[str, Any]) -> Dict[str, Any]:
     p = SummarizeParams(**(params or {}))
@@ -85,7 +86,7 @@ def summarize_text(params: Dict[str, Any]) -> Dict[str, Any]:
     scores = Counter(w for w in words if w and w not in stop)
     ranked = sorted(sents, key=lambda s: sum(scores.get(x.lower().strip(string.punctuation),0) for x in s.split()), reverse=True)
     summary = " ".join(ranked[:min(p.sentences, len(ranked))]) if sents else ""
-    return {"summary": summary}
+    return {"text": summary}
 
 def extract_keywords(params: Dict[str, Any]) -> Dict[str, Any]:
     p = KeywordParams(**(params or {}))
@@ -95,22 +96,21 @@ def extract_keywords(params: Dict[str, Any]) -> Dict[str, Any]:
                   will would can could should have has had than then very just about into over under out up down off
                   if else but so because while when where who whom which what how""".split())
     freq = Counter(w for w in words if w and w not in stop)
-    top = [{"keyword": w, "count": c} for w, c in freq.most_common(max(1, p.top_k))]
-    return {"keywords": top}
+    top = [f"{w}({c})" for w, c in freq.most_common(max(1, p.top_k))]
+    return {"text": ", ".join(top)}
 
 def text_stats(params: Dict[str, Any]) -> Dict[str, Any]:
     p = TextOnly(**(params or {}))
     chars = len(p.text)
     words = len(re.findall(r"\w+", p.text))
     lines = len(p.text.splitlines()) if p.text else 0
-    return {"characters": chars, "words": words, "lines": lines}
+    return {"text": f"Characters: {chars}, Words: {words}, Lines: {lines}"}
 
 def http_get(params: Dict[str, Any]) -> Dict[str, Any]:
     p = HttpGetParams(**(params or {}))
     r = requests.get(p.url, timeout=max(1, min(60, p.timeout)))
-    headers = {k: v for k, v in r.headers.items()}
     text_preview = r.text[:2000] if isinstance(r.text, str) else ""
-    return {"status": r.status_code, "headers": headers, "text": text_preview}
+    return {"text": f"Status: {r.status_code}\n\nContent Preview:\n{text_preview}"}
 
 def regex_extract(params: Dict[str, Any]) -> Dict[str, Any]:
     p = RegexParams(**(params or {}))
@@ -121,4 +121,6 @@ def regex_extract(params: Dict[str, Any]) -> Dict[str, Any]:
         flags |= flag_map.get(f.upper(), 0)
     pat = re.compile(p.pattern, flags)
     matches = [m.group(0) for m in pat.finditer(p.text)]
-    return {"matches": matches, "count": len(matches)}
+    if not matches:
+        return {"text": "No matches found"}
+    return {"text": "\n".join(matches)}
