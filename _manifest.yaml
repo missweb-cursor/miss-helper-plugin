@@ -1,0 +1,275 @@
+version: 0.0.1
+type: plugin
+
+author: missweb-cursor
+name: miss_helper_plugin
+label:
+  en_US: Miss Helper Plugin
+  zh_Hans: Miss助手插件
+
+description:
+  en_US: A ready-to-use toolkit with HTTP and text utilities
+  zh_Hans: 包含HTTP和文本处理的实用工具集
+
+icon: icon.png
+
+plugins:
+  tools:
+    - name: echo_text
+      label:
+        en_US: Echo Text
+        zh_Hans: 文本回显
+      description:
+        en_US: Return the same text back
+        zh_Hans: 返回相同的文本
+      parameters:
+        - name: text
+          type: string
+          required: true
+          label:
+            en_US: Text
+            zh_Hans: 文本
+          human_description:
+            en_US: Text to echo
+            zh_Hans: 要回显的文本
+          form: llm
+
+    - name: transform_text
+      label:
+        en_US: Transform Text
+        zh_Hans: 文本转换
+      description:
+        en_US: Transform text (upper/lower/reverse)
+        zh_Hans: 转换文本（大写/小写/反转）
+      parameters:
+        - name: text
+          type: string
+          required: true
+          label:
+            en_US: Text
+            zh_Hans: 文本
+          human_description:
+            en_US: Text to transform
+            zh_Hans: 要转换的文本
+          form: llm
+        - name: mode
+          type: select
+          required: false
+          default: upper
+          label:
+            en_US: Mode
+            zh_Hans: 模式
+          human_description:
+            en_US: Transform mode
+            zh_Hans: 转换模式
+          form: form
+          options:
+            - value: upper
+              label:
+                en_US: Uppercase
+                zh_Hans: 大写
+            - value: lower
+              label:
+                en_US: Lowercase
+                zh_Hans: 小写
+            - value: reverse
+              label:
+                en_US: Reverse
+                zh_Hans: 反转
+
+    - name: detect_language
+      label:
+        en_US: Detect Language
+        zh_Hans: 语言检测
+      description:
+        en_US: Detect the language of text
+        zh_Hans: 检测文本的语言
+      parameters:
+        - name: text
+          type: string
+          required: true
+          label:
+            en_US: Text
+            zh_Hans: 文本
+          human_description:
+            en_US: Text to detect language
+            zh_Hans: 要检测语言的文本
+          form: llm
+
+    - name: text_stats
+      label:
+        en_US: Text Statistics
+        zh_Hans: 文本统计
+      description:
+        en_US: Count characters, words and lines
+        zh_Hans: 统计字符、单词和行数
+      parameters:
+        - name: text
+          type: string
+          required: true
+          label:
+            en_US: Text
+            zh_Hans: 文本
+          human_description:
+            en_US: Text to analyze
+            zh_Hans: 要分析的文本
+          form: llm
+
+    - name: summarize_text
+      label:
+        en_US: Summarize Text
+        zh_Hans: 文本摘要
+      description:
+        en_US: Generate extractive summary
+        zh_Hans: 生成抽取式摘要
+      parameters:
+        - name: text
+          type: string
+          required: true
+          label:
+            en_US: Text
+            zh_Hans: 文本
+          human_description:
+            en_US: Text to summarize
+            zh_Hans: 要摘要的文本
+          form: llm
+        - name: sentences
+          type: number
+          required: false
+          default: 3
+          label:
+            en_US: Sentences
+            zh_Hans: 句子数
+          human_description:
+            en_US: Number of sentences in summary
+            zh_Hans: 摘要的句子数量
+          form: form
+
+    - name: extract_keywords
+      label:
+        en_US: Extract Keywords
+        zh_Hans: 提取关键词
+      description:
+        en_US: Extract top keywords by frequency
+        zh_Hans: 按频率提取关键词
+      parameters:
+        - name: text
+          type: string
+          required: true
+          label:
+            en_US: Text
+            zh_Hans: 文本
+          human_description:
+            en_US: Text to extract keywords from
+            zh_Hans: 要提取关键词的文本
+          form: llm
+        - name: top_k
+          type: number
+          required: false
+          default: 10
+          label:
+            en_US: Top K
+            zh_Hans: 数量
+          human_description:
+            en_US: Number of keywords to extract
+            zh_Hans: 要提取的关键词数量
+          form: form
+
+    - name: translate_text
+      label:
+        en_US: Translate Text
+        zh_Hans: 文本翻译
+      description:
+        en_US: Translate text via LibreTranslate API
+        zh_Hans: 通过LibreTranslate API翻译文本
+      parameters:
+        - name: text
+          type: string
+          required: true
+          label:
+            en_US: Text
+            zh_Hans: 文本
+          human_description:
+            en_US: Text to translate
+            zh_Hans: 要翻译的文本
+          form: llm
+        - name: target_lang
+          type: string
+          required: true
+          label:
+            en_US: Target Language
+            zh_Hans: 目标语言
+          human_description:
+            en_US: Target language code (e.g., en, zh, ja)
+            zh_Hans: 目标语言代码（如 en, zh, ja）
+          form: llm
+        - name: source_lang
+          type: string
+          required: false
+          default: auto
+          label:
+            en_US: Source Language
+            zh_Hans: 源语言
+          human_description:
+            en_US: Source language code (auto for auto-detect)
+            zh_Hans: 源语言代码（auto表示自动检测）
+          form: form
+
+    - name: http_get
+      label:
+        en_US: HTTP GET Request
+        zh_Hans: HTTP GET请求
+      description:
+        en_US: Fetch a URL and return content
+        zh_Hans: 获取URL内容
+      parameters:
+        - name: url
+          type: string
+          required: true
+          label:
+            en_US: URL
+            zh_Hans: 网址
+          human_description:
+            en_US: URL to fetch
+            zh_Hans: 要获取的网址
+          form: llm
+        - name: timeout
+          type: number
+          required: false
+          default: 15
+          label:
+            en_US: Timeout
+            zh_Hans: 超时时间
+          human_description:
+            en_US: Request timeout in seconds
+            zh_Hans: 请求超时时间（秒）
+          form: form
+
+    - name: regex_extract
+      label:
+        en_US: Regex Extract
+        zh_Hans: 正则提取
+      description:
+        en_US: Extract text using regular expressions
+        zh_Hans: 使用正则表达式提取文本
+      parameters:
+        - name: text
+          type: string
+          required: true
+          label:
+            en_US: Text
+            zh_Hans: 文本
+          human_description:
+            en_US: Text to search in
+            zh_Hans: 要搜索的文本
+          form: llm
+        - name: pattern
+          type: string
+          required: true
+          label:
+            en_US: Pattern
+            zh_Hans: 模式
+          human_description:
+            en_US: Regular expression pattern
+            zh_Hans: 正则表达式模式
+          form: llm
