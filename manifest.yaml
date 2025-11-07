@@ -4,6 +4,9 @@ version: "2.0.0"
 description:
   en_US: "Managed-hosting Dify plugin. A ready-to-use toolkit with HTTP / text utilities."
 
+labels:
+  en_US: "Miss Helper Plugin"
+
 author: "missweb-cursor"
 entry: "main:app"
 
