@@ -1,9 +1,7 @@
-name:
-  en_US: "miss_砖哥助手"
-
+name: "miss_砖哥助手"          # 顶层 name 用字符串
 version: "2.0.0"
 
-description:
+description:                 # 顶层 description 用 I18n 对象
   en_US: "Managed-hosting plugin for Dify. Route B all-in-one toolkit (no remote debug)."
 
 author: "you"
