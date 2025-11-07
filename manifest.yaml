@@ -20,7 +20,8 @@ tool:
       text:
         type: string
         description: Text to echo
-    required: text
+    required:
+      - text
 - name: transform_text
   label:
     en_US: Transform Text
@@ -39,7 +40,8 @@ tool:
         - lower
         - reverse
         description: Transform mode
-    required: text
+    required:
+      - text
 - name: translate_text
   label:
     en_US: Translate Text
@@ -57,7 +59,9 @@ tool:
       source_lang:
         type: string
         description: Optional source code, e.g. auto, en
-    required: text,target_lang
+    required:
+      - text
+      - target_lang
 - name: detect_language
   label:
     en_US: Detect Language
@@ -69,7 +73,8 @@ tool:
       text:
         type: string
         description: Text to detect
-    required: text
+    required:
+      - text
 - name: summarize_text
   label:
     en_US: Summarize Text
@@ -86,7 +91,8 @@ tool:
         minimum: 1
         maximum: 10
         description: Number of sentences in summary
-    required: text
+    required:
+      - text
 - name: extract_keywords
   label:
     en_US: Extract Keywords
@@ -103,7 +109,8 @@ tool:
         minimum: 1
         maximum: 50
         description: Number of keywords to extract
-    required: text
+    required:
+      - text
 - name: text_stats
   label:
     en_US: Text Stats
@@ -115,7 +122,8 @@ tool:
       text:
         type: string
         description: Text to analyze
-    required: text
+    required:
+      - text
 - name: http_get
   label:
     en_US: HTTP GET
@@ -132,7 +140,8 @@ tool:
         minimum: 1
         maximum: 60
         description: Request timeout in seconds
-    required: url
+    required:
+      - url
 - name: regex_extract
   label:
     en_US: Regex Extract
@@ -160,7 +169,9 @@ tool:
           - A
         description: 'Regex flags: I=IGNORECASE, M=MULTILINE, S=DOTALL, U=UNICODE,
           X=VERBOSE, A=ASCII'
-    required: text,pattern
+    required:
+      - text
+      - pattern
   en_US: "Managed-hosting Dify plugin. A ready-to-use toolkit with HTTP / text utilities."
 
 author: "missweb-cursor"

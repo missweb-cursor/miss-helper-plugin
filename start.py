@@ -4,7 +4,6 @@
 用法: python start.py
 """
 import os
-import sys
 
 # 尝试加载 .env 文件
 try:
@@ -35,7 +34,7 @@ print(f"""
 ╚════════════════════════════════════════════════════════════╝
 
 配置信息:
-  - Host: {HOST}
+  - Host: {HOST}{" (请用 localhost 或本机 IP 访问)" if HOST == "0.0.0.0" else ""}
   - Port: {PORT}
   - Log Level: {LOG_LEVEL}
   - CORS: {os.getenv('CORS_ALLOW_ORIGINS', '*')}
