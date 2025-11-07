@@ -1,6 +1,6 @@
 # plugin.py
 import os, re, string, requests
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from collections import Counter
 from pydantic import BaseModel, Field, ValidationError
 from langdetect import detect  # 纯 Python，轻量
@@ -16,7 +16,7 @@ class TransformParams(BaseModel):
 class TranslateParams(BaseModel):
     text: str = Field(..., description="Text to translate")
     target_lang: str = Field(..., description="Target language code")
-    source_lang: str | None = Field(None, description="Source code (optional)")
+    source_lang: Optional[str] = Field(None, description="Source code (optional)")
 
 class TextOnly(BaseModel):
     text: str = Field(..., description="Text")
