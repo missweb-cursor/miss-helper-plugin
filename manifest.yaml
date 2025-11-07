@@ -1,18 +1,18 @@
-name:
-  en_US: "miss_helper_plugin"
-
+name: "miss_helper_plugin"
 version: "2.0.0"
 
 description:
-  en_US: "Managed-hosting plugin for Dify. Route B all-in-one toolkit (no remote debug)."
+  en_US: "Managed-hosting Dify plugin. A ready-to-use toolkit with HTTP / text utilities."
 
-author: "you"
-entry: "main:run"
+author: "missweb-cursor"
+entry: "main:app"
 
 tags: ["utility", "text", "translation", "http", "regex"]
 categories: ["Developer Tools", "Utilities", "Language"]
 
-tools:
+# Dify 要求顶层至少有 endpoint/model/tool/agent_strategy/datasource 之一。
+# 这里使用单数 `tool:`，值是一个列表。
+tool:
   - name: "echo_text"
     label: { en_US: "Echo Text" }
     description: { en_US: "Return the same text back." }
@@ -37,18 +37,18 @@ tools:
 
   - name: "translate_text"
     label: { en_US: "Translate Text" }
-    description: { en_US: "LibreTranslate-compatible text translation." }
+    description: { en_US: "Translate via a LibreTranslate-compatible endpoint." }
     parameters:
       type: "object"
       properties:
-        text:         { type: "string", description: "Text to translate" }
-        target_lang:  { type: "string", description: "Target language code, e.g. en, zh, ja, es" }
-        source_lang:  { type: "string", description: "Optional source code, e.g. auto, en" }
+        text:        { type: "string", description: "Text to translate" }
+        target_lang: { type: "string", description: "Target language code, e.g. en, zh, ja, es" }
+        source_lang: { type: "string", description: "Optional source code, e.g. auto, en" }
       required: ["text","target_lang"]
 
   - name: "detect_language"
     label: { en_US: "Detect Language" }
-    description: { en_US: "Detect language of provided text." }
+    description: { en_US: "Detect language of the given text." }
     parameters:
       type: "object"
       properties:
@@ -57,7 +57,7 @@ tools:
 
   - name: "summarize_text"
     label: { en_US: "Summarize Text" }
-    description: { en_US: "Extractive summary using frequency scoring." }
+    description: { en_US: "Extractive summary by frequency scoring." }
     parameters:
       type: "object"
       properties:
@@ -70,7 +70,7 @@ tools:
 
   - name: "extract_keywords"
     label: { en_US: "Extract Keywords" }
-    description: { en_US: "Top keywords by frequency (stopword-filtered)." }
+    description: { en_US: "Top keywords by frequency (light stopword filtering)." }
     parameters:
       type: "object"
       properties:
@@ -83,7 +83,7 @@ tools:
 
   - name: "text_stats"
     label: { en_US: "Text Stats" }
-    description: { en_US: "Counts characters, words, lines." }
+    description: { en_US: "Counts characters, words and lines." }
     parameters:
       type: "object"
       properties:
