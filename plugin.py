@@ -108,9 +108,12 @@ def text_stats(params: Dict[str, Any]) -> Dict[str, Any]:
 
 def http_get(params: Dict[str, Any]) -> Dict[str, Any]:
     p = HttpGetParams(**(params or {}))
-    r = requests.get(p.url, timeout=max(1, min(60, p.timeout)))
-    text_preview = r.text[:2000] if isinstance(r.text, str) else ""
-    return {"text": f"Status: {r.status_code}\n\nContent Preview:\n{text_preview}"}
+    try:
+        r = requests.get(p.url, timeout=max(1, min(60, p.timeout)))
+        text_preview = r.text[:2000] if isinstance(r.text, str) else ""
+        return {"text": f"Status: {r.status_code}\n\nContent Preview:\n{text_preview}"}
+    except requests.RequestException as e:
+        return {"text": f"Error: {str(e)}"}
 
 def regex_extract(params: Dict[str, Any]) -> Dict[str, Any]:
     p = RegexParams(**(params or {}))

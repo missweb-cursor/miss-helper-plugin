@@ -18,10 +18,11 @@ app = FastAPI(title="miss_helper_plugin", version=APP_VERSION)
 
 # CORS 配置
 origins = [origin.strip() for origin in CORS_ORIGINS.split(",")] if CORS_ORIGINS != "*" else ["*"]
+allow_credentials = CORS_ORIGINS != "*"  # Only allow credentials when origins are specific
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_credentials=True,
+    allow_credentials=allow_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
 )
