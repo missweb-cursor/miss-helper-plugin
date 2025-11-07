@@ -5,13 +5,14 @@ identity:
     en_US: Miss Helper
     zh_Hans: Miss助手
   description:
-    en_US: A comprehensive toolkit with text processing, HTTP requests, translation, and regex utilities.
-    zh_Hans: 一个综合工具包，包含文本处理、HTTP请求、翻译和正则表达式工具。
+    en_US: "A comprehensive toolkit with text processing, HTTP requests, translation, and regex utilities."
+    zh_Hans: "一个综合工具包，包含文本处理、HTTP请求、翻译和正则表达式工具。"
   icon: icon.png
-  tags:
-    - utility
-    - text
-    - translation
+
+credentials_for_provider: {}
+supported_model_types: []
+configurate_methods: []
+
 tools:
   - tools/echo_text.yaml
   - tools/transform_text.yaml
@@ -22,6 +23,7 @@ tools:
   - tools/text_stats.yaml
   - tools/http_get.yaml
   - tools/regex_extract.yaml
+
 extra:
   python:
     source: provider/miss_helper.py
