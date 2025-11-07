@@ -8,7 +8,7 @@ label:
 description:
   en_US: "A ready-to-use toolkit with HTTP / text utilities including translation, regex, text processing and more."
   zh_Hans: "一个即用型工具包，包含文本处理、HTTP请求、翻译、正则表达式等实用工具。"
-icon: icon.png
+icon: icon.svg
 tags:
   - utility
   - text
