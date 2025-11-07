@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+.github/
+
+# Documentation (optional, keep if you want docs in plugin)
+# REPO_ANALYSIS.md
+# VALIDATION_REPORT.md
+# INSTALL_FROM_GITHUB.md
+# READY_TO_INSTALL.md
+# DIFY_FORMAT_REFACTOR.md
+
+# Test files
+test_plugin.py
+final_test.py
+integration_test.py
+
+# Dev scripts
+dev.sh
+quick_test.sh
+check_plugin.py
+check_yaml.py
+publish.py
+git_publish.py
