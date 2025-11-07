@@ -10,17 +10,8 @@ labels:
 author: "missweb-cursor"
 entry: "main:app"
 
-tags:
-  - utility
-  - text
-  - translation
-  - http
-  - regex
-
-categories:
-  - "Developer Tools"
-  - Utilities
-  - Language
+tags: utility,text,translation,http,regex
+categories: Developer Tools,Utilities,Language
 
 tool:
   - name: echo_text
