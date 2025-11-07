@@ -6,280 +6,184 @@ labels:
   en_US: Miss Helper Plugin
 author: missweb-cursor
 entry: main:app
-tags: utility,text,translation,http,regex
-categories: Developer Tools,Utilities,Language
-tool:
-- name: echo_text
-  label:
-    en_US: Echo Text
-  description:
-    en_US: Return the same text back.
-  parameters:
-    type: object
-    properties:
-      text:
-        type: string
-        description: Text to echo
-    required: text
-- name: transform_text
-  label:
-    en_US: Transform Text
-  description:
-    en_US: upper/lower/reverse a string.
-  parameters:
-    type: object
-    properties:
-      text:
-        type: string
-        description: Text to transform
-      mode:
-        type: string
-        enum:
-        - upper
-        - lower
-        - reverse
-        description: Transform mode
-    required: text
-- name: translate_text
-  label:
-    en_US: Translate Text
-  description:
-    en_US: Translate via a LibreTranslate-compatible endpoint.
-  parameters:
-    type: object
-    properties:
-      text:
-        type: string
-        description: Text to translate
-      target_lang:
-        type: string
-        description: Target language code, e.g. en, zh, ja, es
-      source_lang:
-        type: string
-        description: Optional source code, e.g. auto, en
-    required: text,target_lang
-- name: detect_language
-  label:
-    en_US: Detect Language
-  description:
-    en_US: Detect language of the given text.
-  parameters:
-    type: object
-    properties:
-      text:
-        type: string
-        description: Text to detect
-    required: text
-- name: summarize_text
-  label:
-    en_US: Summarize Text
-  description:
-    en_US: Extractive summary by frequency scoring.
-  parameters:
-    type: object
-    properties:
-      text:
-        type: string
-        description: Text to summarize
-      sentences:
-        type: integer
-        minimum: 1
-        maximum: 10
-        description: Number of sentences in summary
-    required: text
-- name: extract_keywords
-  label:
-    en_US: Extract Keywords
-  description:
-    en_US: Top keywords by frequency (light stopword filtering).
-  parameters:
-    type: object
-    properties:
-      text:
-        type: string
-        description: Text to extract keywords from
-      top_k:
-        type: integer
-        minimum: 1
-        maximum: 50
-        description: Number of keywords to extract
-    required: text
-- name: text_stats
-  label:
-    en_US: Text Stats
-  description:
-    en_US: Counts characters, words and lines.
-  parameters:
-    type: object
-    properties:
-      text:
-        type: string
-        description: Text to analyze
-    required: text
-- name: http_get
-  label:
-    en_US: HTTP GET
-  description:
-    en_US: Fetch a URL and return status, headers and preview text.
-  parameters:
-    type: object
-    properties:
-      url:
-        type: string
-        description: URL to fetch
-      timeout:
-        type: integer
-        minimum: 1
-        maximum: 60
-        description: Request timeout in seconds
-    required: url
-- name: regex_extract
-  label:
-    en_US: Regex Extract
-  description:
-    en_US: Find regex matches in text.
-  parameters:
-    type: object
-    properties:
-      text:
-        type: string
-        description: Text to search in
-      pattern:
-        type: string
-        description: Regular expression pattern
-      flags:
-        type: array
-        items:
-          type: string
-          enum:
-          - I
-          - M
-          - S
-          - U
-          - X
-          - A
-        description: 'Regex flags: I=IGNORECASE, M=MULTILINE, S=DOTALL, U=UNICODE,
-          X=VERBOSE, A=ASCII'
-    required: text,pattern
-  en_US: "Managed-hosting Dify plugin. A ready-to-use toolkit with HTTP / text utilities."
-
-author: "missweb-cursor"
-entry: "main:app"
-
 tags:
   - utility
   - text
   - translation
   - http
   - regex
-
 categories:
   - Developer Tools
   - Utilities
   - Language
-
-tools:
-  - name: "echo_text"
-    label: { en_US: "Echo Text" }
-    description: { en_US: "Return the same text back." }
+tool:
+  - name: echo_text
+    label:
+      en_US: Echo Text
+    description:
+      en_US: Return the same text back.
     parameters:
-      type: "object"
+      type: object
       properties:
-        text: { type: "string", description: "Text to echo" }
-      required: ["text"]
+        text:
+          type: string
+          description: Text to echo
+      required:
+        - text
 
-  - name: "transform_text"
-    label: { en_US: "Transform Text" }
-    description: { en_US: "upper/lower/reverse a string." }
+  - name: transform_text
+    label:
+      en_US: Transform Text
+    description:
+      en_US: upper/lower/reverse a string.
     parameters:
-      type: "object"
+      type: object
       properties:
-        text: { type: "string", description: "Text to transform" }
+        text:
+          type: string
+          description: Text to transform
         mode:
-          type: "string"
-          enum: ["upper", "lower", "reverse"]
-          description: "Transform mode"
-      required: ["text"]
+          type: string
+          enum:
+            - upper
+            - lower
+            - reverse
+          description: Transform mode
+      required:
+        - text
 
-  - name: "translate_text"
-    label: { en_US: "Translate Text" }
-    description: { en_US: "Translate via a LibreTranslate-compatible endpoint." }
+  - name: translate_text
+    label:
+      en_US: Translate Text
+    description:
+      en_US: Translate via a LibreTranslate-compatible endpoint.
     parameters:
-      type: "object"
+      type: object
       properties:
-        text: { type: "string", description: "Text to translate" }
-        target_lang: { type: "string", description: "Target language code, e.g. en, zh, ja, es" }
-        source_lang: { type: "string", description: "Optional source code, e.g. auto, en" }
-      required: ["text", "target_lang"]
+        text:
+          type: string
+          description: Text to translate
+        target_lang:
+          type: string
+          description: Target language code, e.g. en, zh, ja, es
+        source_lang:
+          type: string
+          description: Optional source code, e.g. auto, en
+      required:
+        - text
+        - target_lang
 
-  - name: "detect_language"
-    label: { en_US: "Detect Language" }
-    description: { en_US: "Detect language of the given text." }
+  - name: detect_language
+    label:
+      en_US: Detect Language
+    description:
+      en_US: Detect language of the given text.
     parameters:
-      type: "object"
+      type: object
       properties:
-        text: { type: "string", description: "Text to detect" }
-      required: ["text"]
+        text:
+          type: string
+          description: Text to detect
+      required:
+        - text
 
-  - name: "summarize_text"
-    label: { en_US: "Summarize Text" }
-    description: { en_US: "Extractive summary by frequency scoring." }
+  - name: summarize_text
+    label:
+      en_US: Summarize Text
+    description:
+      en_US: Extractive summary by frequency scoring.
     parameters:
-      type: "object"
+      type: object
       properties:
-        text: { type: "string" }
+        text:
+          type: string
+          description: Text to summarize
         sentences:
-          type: "integer"
+          type: integer
           minimum: 1
           maximum: 10
-      required: ["text"]
+          description: Number of sentences in summary
+      required:
+        - text
 
-  - name: "extract_keywords"
-    label: { en_US: "Extract Keywords" }
-    description: { en_US: "Top keywords by frequency (light stopword filtering)." }
+  - name: extract_keywords
+    label:
+      en_US: Extract Keywords
+    description:
+      en_US: Top keywords by frequency (light stopword filtering).
     parameters:
-      type: "object"
+      type: object
       properties:
-        text: { type: "string" }
+        text:
+          type: string
+          description: Text to extract keywords from
         top_k:
-          type: "integer"
+          type: integer
           minimum: 1
           maximum: 50
-      required: ["text"]
+          description: Number of keywords to extract
+      required:
+        - text
 
-  - name: "text_stats"
-    label: { en_US: "Text Stats" }
-    description: { en_US: "Counts characters, words and lines." }
+  - name: text_stats
+    label:
+      en_US: Text Stats
+    description:
+      en_US: Counts characters, words and lines.
     parameters:
-      type: "object"
+      type: object
       properties:
-        text: { type: "string" }
-      required: ["text"]
+        text:
+          type: string
+          description: Text to analyze
+      required:
+        - text
 
-  - name: "http_get"
-    label: { en_US: "HTTP GET" }
-    description: { en_US: "Fetch a URL and return status, headers and preview text." }
+  - name: http_get
+    label:
+      en_US: HTTP GET
+    description:
+      en_US: Fetch a URL and return status, headers and preview text.
     parameters:
-      type: "object"
+      type: object
       properties:
-        url: { type: "string" }
+        url:
+          type: string
+          description: URL to fetch
         timeout:
-          type: "integer"
+          type: integer
           minimum: 1
           maximum: 60
-      required: ["url"]
+          description: Request timeout in seconds
+      required:
+        - url
 
-  - name: "regex_extract"
-    label: { en_US: "Regex Extract" }
-    description: { en_US: "Find regex matches in text." }
+  - name: regex_extract
+    label:
+      en_US: Regex Extract
+    description:
+      en_US: Find regex matches in text.
     parameters:
-      type: "object"
+      type: object
       properties:
-        text: { type: "string" }
-        pattern: { type: "string" }
+        text:
+          type: string
+          description: Text to search in
+        pattern:
+          type: string
+          description: Regular expression pattern
         flags:
-          type: "array"
+          type: array
           items:
-            type: "string"
-            enum: ["I", "M", "S", "U", "X", "A"]
-      required: ["text", "pattern"]
+            type: string
+            enum:
+              - I
+              - M
+              - S
+              - U
+              - X
+              - A
+          description: 'Regex flags: I=IGNORECASE, M=MULTILINE, S=DOTALL, U=UNICODE, X=VERBOSE, A=ASCII'
+      required:
+        - text
+        - pattern
