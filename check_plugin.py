@@ -75,15 +75,10 @@ def check_plugin_structure():
                 warnings.append(f"入口点格式可能不正确: {entry}")
                 print(f"      ⚠️  入口点格式: {entry}")
         
-        # 检查工具数量（支持列表和字典格式）
-        tools = manifest_data.get('tool') or manifest_data.get('tools')
+        # 检查工具数量
+        tools = manifest_data.get('tool') or manifest_data.get('tools') or []
         if tools:
-            tool_count = len(tools) if isinstance(tools, (list, dict)) else 0
-            if tool_count > 0:
-                print(f"   ✅ 定义了 {tool_count} 个工具")
-            else:
-                warnings.append("没有定义任何工具")
-                print(f"   ⚠️  没有定义工具")
+            print(f"   ✅ 定义了 {len(tools)} 个工具")
         else:
             warnings.append("没有定义任何工具")
             print(f"   ⚠️  没有定义工具")
@@ -150,23 +145,16 @@ def check_plugin_structure():
                     app = module.app
                     
                     # 检查每个工具是否有对应的函数
-                    tools = manifest_data.get('tool') or manifest_data.get('tools')
-                    if isinstance(tools, list):
-                        # 旧格式：列表
-                        tool_names = [tool.get('name') for tool in tools if tool.get('name')]
-                    elif isinstance(tools, dict):
-                        # 新格式：字典（工具名作为 key）
-                        tool_names = list(tools.keys())
-                    else:
-                        tool_names = []
-                    
-                    for tool_name in tool_names:
-                        # 检查是否有对应的处理函数
-                        if hasattr(app, tool_name) or tool_name in dir(module):
-                            print(f"      ✅ 工具 '{tool_name}' 已实现")
-                        else:
-                            warnings.append(f"工具 '{tool_name}' 可能未实现")
-                            print(f"      ⚠️  工具 '{tool_name}' 未找到实现")
+                    tools = manifest_data.get('tool') or manifest_data.get('tools') or []
+                    for tool in tools:
+                        tool_name = tool.get('name')
+                        if tool_name:
+                            # 检查是否有对应的处理函数
+                            if hasattr(app, tool_name) or tool_name in dir(module):
+                                print(f"      ✅ 工具 '{tool_name}' 已实现")
+                            else:
+                                warnings.append(f"工具 '{tool_name}' 可能未实现")
+                                print(f"      ⚠️  工具 '{tool_name}' 未找到实现")
                 else:
                     warnings.append("main.py 中未找到 'app' 对象")
                     print("   ⚠️  未找到 'app' 对象")

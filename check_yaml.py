@@ -62,10 +62,11 @@ def check_yaml_format(yaml_file):
         print("   ❌ 没有定义任何工具")
     else:
         tools = data.get('tool') or data.get('tools')
-        # 支持两种格式：列表格式（旧）和字典格式（新，使用 alias）
-        if isinstance(tools, list):
-            # 旧格式：列表
-            print(f"   ✅ 定义了 {len(tools)} 个工具 (列表格式):")
+        if not isinstance(tools, list):
+            errors.append("'tool' 字段必须是列表")
+            print("   ❌ 工具定义格式错误（必须是列表）")
+        else:
+            print(f"   ✅ 定义了 {len(tools)} 个工具:")
             for i, tool in enumerate(tools, 1):
                 tool_name = tool.get('name', f'工具{i}')
                 if 'name' not in tool:
@@ -76,18 +77,6 @@ def check_yaml_format(yaml_file):
                     print(f"      ❌ {tool_name}: 缺少 parameters")
                 else:
                     print(f"      ✅ {tool_name}")
-        elif isinstance(tools, dict):
-            # 新格式：字典（使用工具名作为 key/alias）
-            print(f"   ✅ 定义了 {len(tools)} 个工具 (字典格式，使用 alias):")
-            for tool_name, tool_config in tools.items():
-                if 'parameters' not in tool_config:
-                    errors.append(f"工具 '{tool_name}' 缺少 'parameters' 字段")
-                    print(f"      ❌ {tool_name}: 缺少 parameters")
-                else:
-                    print(f"      ✅ {tool_name}")
-        else:
-            errors.append("'tool' 字段必须是列表或字典")
-            print("   ❌ 工具定义格式错误（必须是列表或字典）")
     
     # 6. 检查 entry 格式
     print("\n📍 检查入口点:")
