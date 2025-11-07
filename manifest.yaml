@@ -10,7 +10,7 @@ entry: "main:app"
 tags: ["utility", "text", "translation", "http", "regex"]
 categories: ["Developer Tools", "Utilities", "Language"]
 
-tool:
+tools:
   - name: "echo_text"
     label: { en_US: "Echo Text" }
     description: { en_US: "Return the same text back." }
