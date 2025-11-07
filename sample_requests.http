@@ -1,0 +1,56 @@
+### Tools
+GET http://localhost:8000/tools
+
+### Echo
+POST http://localhost:8000/invoke
+Content-Type: application/json
+
+{ "tool": "echo_text", "parameters": { "text": "hello" } }
+
+### Transform
+POST http://localhost:8000/invoke
+Content-Type: application/json
+
+{ "tool": "transform_text", "parameters": { "text": "Hello", "mode": "reverse" } }
+
+### Translate
+POST http://localhost:8000/invoke
+Content-Type: application/json
+
+{ "tool": "translate_text", "parameters": { "text": "你好", "target_lang": "en" } }
+
+### Detect Language
+POST http://localhost:8000/invoke
+Content-Type: application/json
+
+{ "tool": "detect_language", "parameters": { "text": "これは日本語です" } }
+
+### Summarize
+POST http://localhost:8000/invoke
+Content-Type: application/json
+
+{ "tool": "summarize_text", "parameters": { "text": "第一句。第二句。第三句。第四句。", "sentences": 2 } }
+
+### Extract Keywords
+POST http://localhost:8000/invoke
+Content-Type: application/json
+
+{ "tool": "extract_keywords", "parameters": { "text": "FastAPI plugin toolkit, plugin toolkit, plugin, toolkit, text analytics", "top_k": 5 } }
+
+### Text Stats
+POST http://localhost:8000/invoke
+Content-Type: application/json
+
+{ "tool": "text_stats", "parameters": { "text": "line1\nline2 two words\n" } }
+
+### HTTP GET
+POST http://localhost:8000/invoke
+Content-Type: application/json
+
+{ "tool": "http_get", "parameters": { "url": "https://example.com", "timeout": 10 } }
+
+### Regex Extract
+POST http://localhost:8000/invoke
+Content-Type: application/json
+
+{ "tool": "regex_extract", "parameters": { "text": "order-123 and order-456", "pattern": "order-(\\d+)", "flags": ["I"] } }
