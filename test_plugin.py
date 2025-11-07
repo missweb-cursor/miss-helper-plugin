@@ -23,7 +23,7 @@ def test_plugin_load():
         )
     except subprocess.TimeoutExpired as e:
         # 插件会持续运行，超时是正常的
-        output = e.stdout if e.stdout else ""
+        output = e.stdout.decode('utf-8') if isinstance(e.stdout, bytes) else (e.stdout if e.stdout else "")
         
         if "Installed tool: miss_helper" in output:
             print("✅ 插件成功加载")
