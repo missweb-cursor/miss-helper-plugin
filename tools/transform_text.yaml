@@ -1,0 +1,50 @@
+identity:
+  name: transform_text
+  author: missweb-cursor
+  label:
+    en_US: Transform Text
+    zh_Hans: 转换文本
+description:
+  human:
+    en_US: Transform text to upper case, lower case, or reverse it.
+    zh_Hans: 将文本转换为大写、小写或反转。
+  llm: Transform text by converting it to UPPER CASE, lower case, or reversing the string.
+parameters:
+  - name: text
+    type: string
+    required: true
+    label:
+      en_US: Text
+      zh_Hans: 文本
+    human_description:
+      en_US: Text to transform
+      zh_Hans: 要转换的文本
+    llm_description: The text string to be transformed
+    form: llm
+  - name: mode
+    type: string
+    required: true
+    label:
+      en_US: Transform Mode
+      zh_Hans: 转换模式
+    human_description:
+      en_US: Choose transformation mode (upper/lower/reverse)
+      zh_Hans: 选择转换模式（大写/小写/反转）
+    llm_description: The transformation mode - use "upper" for uppercase, "lower" for lowercase, or "reverse" to reverse the string
+    form: llm
+    options:
+      - value: upper
+        label:
+          en_US: Upper Case
+          zh_Hans: 大写
+      - value: lower
+        label:
+          en_US: Lower Case
+          zh_Hans: 小写
+      - value: reverse
+        label:
+          en_US: Reverse
+          zh_Hans: 反转
+extra:
+  python:
+    source: tools/transform_text.py

@@ -1,0 +1,26 @@
+identity:
+  name: text_stats
+  author: missweb-cursor
+  label:
+    en_US: Text Stats
+    zh_Hans: 文本统计
+description:
+  human:
+    en_US: Count characters, words, and lines in text.
+    zh_Hans: 统计文本中的字符、单词和行数。
+  llm: Analyze text and return statistics including character count, word count, and line count.
+parameters:
+  - name: text
+    type: string
+    required: true
+    label:
+      en_US: Text
+      zh_Hans: 文本
+    human_description:
+      en_US: Text to analyze
+      zh_Hans: 要分析的文本
+    llm_description: The text content to analyze and get statistics
+    form: llm
+extra:
+  python:
+    source: tools/text_stats.py

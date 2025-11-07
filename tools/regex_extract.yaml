@@ -1,0 +1,48 @@
+identity:
+  name: regex_extract
+  author: missweb-cursor
+  label:
+    en_US: Regex Extract
+    zh_Hans: 正则表达式提取
+description:
+  human:
+    en_US: Find regex pattern matches in text.
+    zh_Hans: 在文本中查找正则表达式匹配项。
+  llm: Use regular expressions to extract patterns from text. Supports regex flags for case-insensitive, multiline, and other modes.
+parameters:
+  - name: text
+    type: string
+    required: true
+    label:
+      en_US: Text
+      zh_Hans: 文本
+    human_description:
+      en_US: Text to search in
+      zh_Hans: 要搜索的文本
+    llm_description: The text content to search for regex patterns
+    form: llm
+  - name: pattern
+    type: string
+    required: true
+    label:
+      en_US: Regex Pattern
+      zh_Hans: 正则表达式
+    human_description:
+      en_US: Regular expression pattern
+      zh_Hans: 正则表达式模式
+    llm_description: The regular expression pattern to match in the text
+    form: llm
+  - name: flags
+    type: string
+    required: false
+    label:
+      en_US: Regex Flags
+      zh_Hans: 正则标志
+    human_description:
+      en_US: Regex flags (comma-separated, e.g. I,M for case-insensitive and multiline)
+      zh_Hans: 正则标志（逗号分隔，如 I,M 表示不区分大小写和多行模式）
+    llm_description: "(Optional) Regex flags as comma-separated values. Available: I (case-insensitive), M (multiline), S (dotall), U (unicode), X (verbose), A (ASCII)"
+    form: llm
+extra:
+  python:
+    source: tools/regex_extract.py

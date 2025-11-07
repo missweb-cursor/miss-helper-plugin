@@ -1,0 +1,26 @@
+identity:
+  name: echo_text
+  author: missweb-cursor
+  label:
+    en_US: Echo Text
+    zh_Hans: 回显文本
+description:
+  human:
+    en_US: Return the same text back.
+    zh_Hans: 返回相同的文本。
+  llm: A simple tool that echoes back the input text. Use this to test text processing or return text as-is.
+parameters:
+  - name: text
+    type: string
+    required: true
+    label:
+      en_US: Text
+      zh_Hans: 文本
+    human_description:
+      en_US: Text to echo
+      zh_Hans: 要回显的文本
+    llm_description: The text string to be echoed back
+    form: llm
+extra:
+  python:
+    source: tools/echo_text.py

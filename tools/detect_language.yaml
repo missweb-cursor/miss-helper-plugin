@@ -1,0 +1,26 @@
+identity:
+  name: detect_language
+  author: missweb-cursor
+  label:
+    en_US: Detect Language
+    zh_Hans: 检测语言
+description:
+  human:
+    en_US: Detect the language of the given text.
+    zh_Hans: 检测给定文本的语言。
+  llm: Automatically detect the language of input text. Returns language code like 'en', 'zh', 'ja', etc.
+parameters:
+  - name: text
+    type: string
+    required: true
+    label:
+      en_US: Text
+      zh_Hans: 文本
+    human_description:
+      en_US: Text to detect language
+      zh_Hans: 要检测语言的文本
+    llm_description: The text content to detect its language
+    form: llm
+extra:
+  python:
+    source: tools/detect_language.py
