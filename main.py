@@ -2,16 +2,29 @@
 import os
 from typing import Any, Dict, Optional
 from fastapi import FastAPI, HTTPException, Header
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from plugin import (
     echo_text, transform_text, translate_text, detect_language,
     summarize_text, extract_keywords, text_stats, http_get, regex_extract
 )
 
+# 环境变量配置
 PUBLISH_TOKEN = os.getenv("PUBLISH_TOKEN", "").strip()
 APP_VERSION = "2.0.0"
+CORS_ORIGINS = os.getenv("CORS_ALLOW_ORIGINS", "*").strip()
 
 app = FastAPI(title="miss_helper_plugin", version=APP_VERSION)
+
+# CORS 配置
+origins = [origin.strip() for origin in CORS_ORIGINS.split(",")] if CORS_ORIGINS != "*" else ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class InvokePayload(BaseModel):
     tool: str
