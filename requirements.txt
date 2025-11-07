@@ -1,5 +1,6 @@
-fastapi
-uvicorn
-pydantic
-requests
-langdetect
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.0.0
+requests>=2.31.0
+langdetect>=1.0.9
+PyYAML>=6.0
