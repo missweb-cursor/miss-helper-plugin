@@ -3,9 +3,7 @@
 
 # 加载 .env 文件
 if [ -f .env ]; then
-    set -a
-    source .env
-    set +a
+    export $(cat .env | grep -v '^#' | xargs)
     echo "✓ 已加载 .env 配置"
 fi
 
