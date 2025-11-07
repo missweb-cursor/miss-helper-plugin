@@ -1,3 +1,4 @@
+# main.py
 import os, json
 from pathlib import Path
 from typing import Any, Dict, Optional, List
@@ -23,6 +24,7 @@ app = FastAPI(
     version=API_VERSION,
 )
 
+# CORS
 if CORS_ALLOW_ORIGINS:
     app.add_middleware(
         CORSMiddleware,
@@ -32,14 +34,17 @@ if CORS_ALLOW_ORIGINS:
         allow_headers=["*"],
     )
 
+# -------- Models --------
 class InvokePayload(BaseModel):
     tool: str
     parameters: Dict[str, Any] = {}
 
+# -------- Helpers --------
 def require_token(x_plugin_token: Optional[str]) -> None:
     if PUBLISH_TOKEN and (x_plugin_token or "") != PUBLISH_TOKEN:
         raise HTTPException(status_code=401, detail="Unauthorized: invalid X-Plugin-Token")
 
+# -------- Global error handlers --------
 @app.exception_handler(HTTPException)
 async def http_exc_handler(request: Request, exc: HTTPException):
     return JSONResponse(status_code=exc.status_code, content={"ok": False, "error": "http_error", "details": exc.detail})
@@ -48,6 +53,7 @@ async def http_exc_handler(request: Request, exc: HTTPException):
 async def any_exc_handler(request: Request, exc: Exception):
     return JSONResponse(status_code=500, content={"ok": False, "error": "server_error", "details": str(exc)})
 
+# -------- Routes --------
 @app.get("/")
 def root():
     return {"ok": True, "app": "miss_砖哥助手", "version": API_VERSION}
@@ -95,9 +101,15 @@ def invoke(payload: InvokePayload, x_plugin_token: Optional[str] = Header(defaul
 
     raise HTTPException(status_code=404, detail=f"Unknown tool: {tool}")
 
-if __name__ == "__main__":
+# -------- Plugin entry for Dify --------
+def run():
+    """Dify 插件入口：用于 manifest.entry = 'main:run'"""
     import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=PORT, log_level=LOG_LEVEL)
+
+# Local dev
+if __name__ == "__main__":
     print("=== miss_砖哥助手 插件 (Route B All-in-One) 启动 ===")
     print(f"端口: {PORT} | 日志: {LOG_LEVEL}")
-    print("健康检查: http://127.0.0.1:{}/health".format(PORT))
-    uvicorn.run(app, host="0.0.0.0", port=PORT, log_level=LOG_LEVEL)
+    print(f"健康检查: http://127.0.0.1:{PORT}/health")
+    run()
