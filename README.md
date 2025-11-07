@@ -12,23 +12,27 @@
 
 ## 🚀 快速开始
 
+### 在 Dify 中安装
+
+1. 登录 [Dify 云平台](https://cloud.dify.ai)
+2. 进入「插件」→「安装插件」
+3. 选择「从 GitHub 安装」
+4. 输入仓库：`https://github.com/missweb-cursor/miss-helper-plugin`
+5. 分支：`main`
+6. 点击「安装」
+
+### 本地开发
+
 ```bash
 # 1. 安装依赖
 pip install -r requirements.txt
 
 # 2. 配置环境变量（可选）
-cp .env.example .env  # 或直接编辑 .env
+cp .env.example .env
 
-# 3. 启动服务
-python start.py
-# 或开发模式（热重载）
+# 3. 启动开发服务器
 ./dev.sh
 ```
-
-## 📖 详细文档
-
-- [部署指南](DEPLOYMENT.md) - 完整的配置和部署说明
-- [标准检查](DIFY_STANDARD_CHECK.md) - Dify 插件标准合规性报告
 
 ## 🛠️ 工具列表
 
@@ -50,8 +54,10 @@ python start.py
 | LOG_LEVEL | 日志级别 | info |
 | PUBLISH_TOKEN | API认证Token | - |
 | CORS_ALLOW_ORIGINS | CORS来源 | * |
+| TRANSLATE_API_URL | 翻译服务地址 | - |
+| TRANSLATE_API_KEY | 翻译服务密钥 | - |
 
-详见 [DEPLOYMENT.md](DEPLOYMENT.md)
+查看 `.env.example` 了解完整配置选项。
 
 ## 📡 API 示例
 
