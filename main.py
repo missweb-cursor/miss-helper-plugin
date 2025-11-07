@@ -88,24 +88,3 @@ def invoke(payload: InvokePayload, x_plugin_token: Optional[str] = Header(defaul
     if t == "regex_extract":     return regex_extract(p)
 
     raise HTTPException(status_code=404, detail=f"Unknown tool: {t}")
-    tool_name = payload.resolved_tool()
-    if not tool_name:
-        raise HTTPException(status_code=422, detail="`tool` (or `tool_name`) is required")
-
-    handler = TOOL_REGISTRY.get(tool_name)
-    if handler is None:
-        raise HTTPException(status_code=404, detail=f"Unknown tool: {tool_name}")
-
-    try:
-        result = handler(payload.resolved_params())
-    except ValidationError as exc:
-        raise HTTPException(
-            status_code=422,
-            detail={"message": "Invalid parameters", "errors": exc.errors()},
-        ) from exc
-
-    return {"type": "object", "result": result, "tool_name": tool_name}
-    main
-
-    # 兼容某些运行环境把 entry 写成 main:run
-    run = app
