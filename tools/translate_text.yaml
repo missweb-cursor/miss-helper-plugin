@@ -1,0 +1,48 @@
+identity:
+  name: translate_text
+  author: missweb-cursor
+  label:
+    en_US: Translate Text
+    zh_Hans: 翻译文本
+description:
+  human:
+    en_US: Translate text using LibreTranslate-compatible API.
+    zh_Hans: 使用 LibreTranslate 兼容API翻译文本。
+  llm: Translate text from one language to another using LibreTranslate API. Supports multiple languages including English, Chinese, Japanese, Spanish, etc.
+parameters:
+  - name: text
+    type: string
+    required: true
+    label:
+      en_US: Text
+      zh_Hans: 文本
+    human_description:
+      en_US: Text to translate
+      zh_Hans: 要翻译的文本
+    llm_description: The text content to be translated
+    form: llm
+  - name: target_lang
+    type: string
+    required: true
+    label:
+      en_US: Target Language
+      zh_Hans: 目标语言
+    human_description:
+      en_US: Target language code (e.g. en, zh, ja, es, fr, de)
+      zh_Hans: 目标语言代码（如 en, zh, ja, es, fr, de）
+    llm_description: The target language code for translation. Common codes - en (English), zh (Chinese), ja (Japanese), es (Spanish), fr (French), de (German)
+    form: llm
+  - name: source_lang
+    type: string
+    required: false
+    label:
+      en_US: Source Language
+      zh_Hans: 源语言
+    human_description:
+      en_US: Source language code (optional, auto-detect if not specified)
+      zh_Hans: 源语言代码（可选，不指定则自动检测）
+    llm_description: "(Optional) The source language code. Use 'auto' or leave empty for automatic detection"
+    form: llm
+extra:
+  python:
+    source: tools/translate_text.py

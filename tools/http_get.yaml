@@ -1,0 +1,37 @@
+identity:
+  name: http_get
+  author: missweb-cursor
+  label:
+    en_US: HTTP GET
+    zh_Hans: HTTP GET请求
+description:
+  human:
+    en_US: Fetch a URL with HTTP GET and return status, headers, and preview text.
+    zh_Hans: 使用HTTP GET获取URL并返回状态、头部和预览文本。
+  llm: Perform an HTTP GET request to fetch a URL. Returns the HTTP status code, headers, and a preview of the content.
+parameters:
+  - name: url
+    type: string
+    required: true
+    label:
+      en_US: URL
+      zh_Hans: 网址
+    human_description:
+      en_US: URL to fetch
+      zh_Hans: 要获取的网址
+    llm_description: The full URL to fetch with HTTP GET request
+    form: llm
+  - name: timeout
+    type: number
+    required: false
+    label:
+      en_US: Timeout (seconds)
+      zh_Hans: 超时时间（秒）
+    human_description:
+      en_US: Request timeout in seconds (1-60, default is 15)
+      zh_Hans: 请求超时时间（秒）（1-60，默认为15）
+    llm_description: "(Optional) The timeout for the HTTP request in seconds. Range: 1-60, default is 15"
+    form: llm
+extra:
+  python:
+    source: tools/http_get.py

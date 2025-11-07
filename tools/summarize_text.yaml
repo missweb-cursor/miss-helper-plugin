@@ -1,0 +1,37 @@
+identity:
+  name: summarize_text
+  author: missweb-cursor
+  label:
+    en_US: Summarize Text
+    zh_Hans: 文本摘要
+description:
+  human:
+    en_US: Generate an extractive summary using frequency scoring.
+    zh_Hans: 使用频率评分生成提取式摘要。
+  llm: Create a summary of text by extracting the most important sentences based on word frequency analysis.
+parameters:
+  - name: text
+    type: string
+    required: true
+    label:
+      en_US: Text
+      zh_Hans: 文本
+    human_description:
+      en_US: Text to summarize
+      zh_Hans: 要摘要的文本
+    llm_description: The text content to be summarized
+    form: llm
+  - name: sentences
+    type: number
+    required: false
+    label:
+      en_US: Number of Sentences
+      zh_Hans: 句子数量
+    human_description:
+      en_US: Number of sentences in summary (1-10, default is 3)
+      zh_Hans: 摘要中的句子数量（1-10，默认为3）
+    llm_description: "(Optional) The number of sentences to include in the summary. Range: 1-10, default is 3"
+    form: llm
+extra:
+  python:
+    source: tools/summarize_text.py
