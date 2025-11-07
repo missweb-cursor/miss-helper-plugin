@@ -17,7 +17,7 @@ categories:
   - Utilities
   - Language
 tool:
-  - name: echo_text
+  echo_text:
     label:
       en_US: Echo Text
     description:
@@ -31,7 +31,7 @@ tool:
       required:
         - text
 
-  - name: transform_text
+  transform_text:
     label:
       en_US: Transform Text
     description:
@@ -52,7 +52,7 @@ tool:
       required:
         - text
 
-  - name: translate_text
+  translate_text:
     label:
       en_US: Translate Text
     description:
@@ -73,7 +73,7 @@ tool:
         - text
         - target_lang
 
-  - name: detect_language
+  detect_language:
     label:
       en_US: Detect Language
     description:
@@ -87,7 +87,7 @@ tool:
       required:
         - text
 
-  - name: summarize_text
+  summarize_text:
     label:
       en_US: Summarize Text
     description:
@@ -106,7 +106,7 @@ tool:
       required:
         - text
 
-  - name: extract_keywords
+  extract_keywords:
     label:
       en_US: Extract Keywords
     description:
@@ -125,7 +125,7 @@ tool:
       required:
         - text
 
-  - name: text_stats
+  text_stats:
     label:
       en_US: Text Stats
     description:
@@ -139,7 +139,7 @@ tool:
       required:
         - text
 
-  - name: http_get
+  http_get:
     label:
       en_US: HTTP GET
     description:
@@ -158,7 +158,7 @@ tool:
       required:
         - url
 
-  - name: regex_extract
+  regex_extract:
     label:
       en_US: Regex Extract
     description:
