@@ -10,8 +10,6 @@ entry: "main:app"
 tags: ["utility", "text", "translation", "http", "regex"]
 categories: ["Developer Tools", "Utilities", "Language"]
 
-# Dify 要求顶层至少有 endpoint/model/tool/agent_strategy/datasource 之一。
-# 这里使用单数 `tool:`，值是一个列表。
 tool:
   - name: "echo_text"
     label: { en_US: "Echo Text" }
